@@ -15,7 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class MySurfaceView extends SurfaceView implements
-		SurfaceHolder.Callback {
+		SurfaceHolder.Callback, Runnable {
 
 	private Context mContext;
 	private SurfaceHolder mHolder;
@@ -61,7 +61,7 @@ public class MySurfaceView extends SurfaceView implements
 		doDraw();
 	}
 	
-	private void doDraw() {
+	public void doDraw() {
 		Log.v("SampleSurView", "drww called.");
 		// SurfaceHolderからCanvasのインスタンスを取得する
 		Canvas canvas = mHolder.lockCanvas();
@@ -103,5 +103,18 @@ public class MySurfaceView extends SurfaceView implements
 		Log.d("zzz", "disp");
 		doDraw();
 	}
-	
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(Thread.interrupted()) {
+			doDraw();
+			
+			try {
+				Thread.sleep(1000);
+			} catch(InterruptedException e) {
+				break;
+			}
+		}
+	}
 }
