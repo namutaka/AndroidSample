@@ -106,8 +106,7 @@ public class MySurfaceView extends SurfaceView implements
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		while(Thread.interrupted()) {
+		while(!Thread.interrupted()) {
 			doDraw();
 			
 			try {

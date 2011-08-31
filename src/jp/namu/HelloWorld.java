@@ -32,11 +32,13 @@ public class HelloWorld extends Activity {
 	
 	protected void onResume() {
 		super.onResume();
-		mHandler.sendEmptyMessageDelayed(0, 3000);
+		mHandler.sendEmptyMessageDelayed(1, 3000);
 	}
 	
 	protected void onDestroy() {
+		if (mThread != null) {
 		mThread.interrupt();
+		}
 		mThread = null;
 	}
 	
@@ -51,7 +53,6 @@ public class HelloWorld extends Activity {
 				Log.v("AAA", "redraw");
 				//findViewById(R.id.root).invalidate();
 
-//				view.refreshDrawableState();
 				view.doDraw();
 				sendEmptyMessageDelayed(0, 3000);
 				break;
