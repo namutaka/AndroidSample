@@ -12,38 +12,38 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class HelloWorld extends Activity {
-	
+
 	private Thread mThread = null;
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		MySurfaceView view = (MySurfaceView)findViewById(R.id.MySurfaceView01);
 		view.setZOrderOnTop(true);
 		SurfaceHolder h = view.getHolder();
 		h.setFormat(PixelFormat.TRANSPARENT);
 //		h.addCallback(new MySurfaceView(this));
 		h.addCallback(view);
-		
+
 	}
-	
+
 	protected void onResume() {
 		super.onResume();
 		mHandler.sendEmptyMessageDelayed(1, 3000);
 	}
-	
+
 	protected void onDestroy() {
 		if (mThread != null) {
 		mThread.interrupt();
 		}
 		mThread = null;
 	}
-	
-	
-	
+
+
+
 	Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -56,7 +56,7 @@ public class HelloWorld extends Activity {
 				view.doDraw();
 				sendEmptyMessageDelayed(0, 3000);
 				break;
-				
+
 			case 1:
 				mThread = new Thread(view);
 				mThread.start();
@@ -64,7 +64,7 @@ public class HelloWorld extends Activity {
 			}
 		}
 	};
-	
+
 	public void tryGroovy() {
 		try {
 //			GroovyShell gs = new GroovyShell();
@@ -78,6 +78,10 @@ public class HelloWorld extends Activity {
 			Log.e("a", "error", e);
 		}
 	}
-	
-	
+
+    public void newFunc() {
+
+    }
+
+
 }
